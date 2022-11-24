@@ -1,0 +1,10 @@
+model:
+  mode: test
+  load_model: dataset_dependent/prostate_ugr/experiments/retraining/
+
+data:
+  artifact_dir: dataset_dependent/prostate_ugr/experiments/retraining/
+
+logging:
+  run_name: retraining
+  log_artifacts: True

@@ -1,0 +1,11 @@
+model:
+  mode: predict
+  load_model: dataset_dependent/prostate_ugr/experiments/retraining/
+
+data:
+  artifact_dir: dataset_dependent/prostate_ugr/experiments/retraining/
+  data_split_dir: /data/Prostata/Images_September/Data/Partition_ROI/ROI_Arne/
+
+logging:
+  run_name: retraining
+  log_artifacts: True
