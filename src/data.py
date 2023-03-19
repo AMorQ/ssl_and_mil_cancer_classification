@@ -118,9 +118,10 @@ class DataGenerator():
         )
         mask = filepaths.apply(validate_filename, args=(('png', 'jpg', 'jpeg', 'bmp', 'ppm', 'tif', 'tiff'),))
         dataframe = dataframe[mask]
+        #dataframe.to_csv()
         n_invalid = (~mask).sum()
         if n_invalid:
-            print('Warning. Found ' + str(n_invalid) + 'invalid filnames')
+            print('Warning. Found ' + str(n_invalid) + ' invalid filenames')
         dataframe = dataframe.reset_index(drop=True)
         dataframe['index'] = dataframe.index
 
@@ -137,8 +138,13 @@ class DataGenerator():
             # save_to_dir=self.data_config['artifact_dir'] + '/' + image_augmentation,
             # save_format='jpeg'
             )
-        if len(dataframe) > len(generator):
+        print(len(generator), len(dataframe))
+        dataframe_not = dataframe[~dataframe['image_path'].isin(generator.filenames)]
+        dataframe_log_not = dataframe[np.logical_not(dataframe['image_path'].isin(generator.filenames))]
+        if len(dataframe) > len(generator.filenames):
+
             dataframe = dataframe[dataframe['image_path'].isin(generator.filenames)]
+
             print('Attention! Not all images in Dataframe were loaded.')
 
         return generator, dataframe

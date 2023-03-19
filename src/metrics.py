@@ -1,8 +1,10 @@
 import pandas as pd
 import numpy as np
-from sklearn.metrics import accuracy_score, cohen_kappa_score, f1_score, confusion_matrix
+import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score, cohen_kappa_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
 from utils.wsi_prostate_cancer_utils import calc_wsi_prostate_cancer_metrics, calc_gleason_grade
 from utils.wsi_cancer_binary_utils import calc_wsi_binary_prediction, calc_wsi_cancer_binary_metrics
+from data import DataGenerator
 
 
 class MetricCalculator():
@@ -65,10 +67,13 @@ class MetricCalculator():
             val_gen = self.val_gen
             val_predictions = model.predict(val_gen, batch_size=batch_size,
                                                     steps=np.ceil(val_gen.n / batch_size), verbose=1)
+            self.val_predictions = val_predictions
             test_gen = self.test_gen
             test_predictions = model.predict(test_gen, batch_size=batch_size, steps=np.ceil(test_gen.n / batch_size), verbose=1)
+            self.test_predictions = test_predictions
 
         return val_predictions, test_predictions
+    #no está no muy bie que lo metas en MetricCalculator, ahí sólo tienes las cosas que necesitas y las funciones, pero no los resultados
 
     def calc_patch_level_metrics(self, predictions_softmax: np.array):
         """
@@ -81,6 +86,9 @@ class MetricCalculator():
         gt_classes = np.array(gt_classes[indices_of_labeled_patches]).astype(np.int)
         predictions = np.array(predictions[indices_of_labeled_patches]).astype(np.int)
 
+        ConfusionMatrixDisplay.from_predictions(gt_classes, predictions)
+        plt.show()
+
         metrics ={}
         metrics['accuracy'] = accuracy_score(gt_classes, predictions)
         metrics['cohens_quadratic_kappa'] = cohen_kappa_score(gt_classes, predictions, weights='quadratic')
@@ -89,6 +97,7 @@ class MetricCalculator():
         for class_id in range(len(f1_score_classwise)):
             key = 'f1_class_id_' + str(class_id)
             metrics[key] = f1_score_classwise[class_id]
+
         return metrics
 
     def calc_optimal_wsi_metrics(self, val_predictions: np.array, test_predictions: np.array):
@@ -121,6 +130,9 @@ class MetricCalculator():
             metrics_dict, artifacts, optimization_value = calc_wsi_cancer_binary_metrics(wsi_predict_dataframe, wsi_gt_dataframe)
 
         return metrics_dict, artifacts, optimization_value
+
+
+
 
     def calc_optimal_confidence_threshold(self, predictions: np.array, gt_dataframe: pd.DataFrame):
         """

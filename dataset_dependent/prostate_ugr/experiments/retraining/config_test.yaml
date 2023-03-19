@@ -1,10 +1,10 @@
 model:
   mode: test
-  load_model: dataset_dependent/prostate_ugr/experiments/retraining/
+  load_model: /home/alba/PycharmProjects/ssl_and_mil_cancer_classification/dataset_dependent/prostate_ugr/experiments/retraining/fine_tuning_correction
 
 data:
-  artifact_dir: dataset_dependent/prostate_ugr/experiments/retraining/
+  artifact_dir: dataset_dependent/prostate_ugr/experiments/retraining/fine_tuning
 
 logging:
-  run_name: retraining
+  run_name: fine_tuning_correction_test
   log_artifacts: True

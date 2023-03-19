@@ -33,9 +33,9 @@ def get_instance_classes(dataframe, dataframe_raw, wsi_df, data_config, split):
         elif data_config['dataset_type'] == 'prostate_cancer':
             class_columns = [dataframe_raw["NC"], dataframe_raw["G3"], dataframe_raw["G4"], dataframe_raw["G5"],
                              dataframe_raw["unlabeled"]]
-    #
-    # if data_config['supervision'] == 'mil' and data_config['dataset_type'] == 'prostate_cancer':
-    #     class_columns = [dataframe_raw["NC"], dataframe_raw["G3"], dataframe_raw["G4"], dataframe_raw["G5"], dataframe_raw["unlabeled"]]
+    #????????????
+     #if data_config['supervision'] == 'mil' and data_config['dataset_type'] == 'prostate_cancer':
+       # class_columns = [dataframe_raw["NC"], dataframe_raw["G3"], dataframe_raw["G4"], dataframe_raw["G5"], dataframe_raw["unlabeled"]]
     # elif data_config['supervision'] == 'supervised' and data_config['dataset_type'] == 'prostate_cancer':
     #     class_columns = [dataframe_raw["NC"], dataframe_raw["G3"], dataframe_raw["G4"], dataframe_raw["G5"]]
     # elif data_config['supervision'] == 'mil' and data_config['dataset_type'] == 'cancer_binary':

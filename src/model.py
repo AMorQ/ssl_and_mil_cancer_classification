@@ -10,6 +10,7 @@ from sklearn.utils import class_weight
 from utils.mil_utils import combine_pseudo_labels_with_instance_labels, get_data_generator_with_targets, \
     get_data_generator_without_targets, get_one_hot_training_targets
 from utils.save_utils import save_dataframe_with_output, save_metrics_artifacts
+
 from metrics import MetricCalculator
 from typing import Dict, Optional, Tuple
 from data import DataGenerator
@@ -112,6 +113,8 @@ class Model:
         df = data_gen.test_df
         predictions = self.model.predict(data_gen.test_generator)
         save_dataframe_with_output(df, predictions, None, self.config['output_dir'], 'test_predictions', predict_mode=True)
+
+
 
     def predict_features(self, data_gen: DataGenerator):
         """

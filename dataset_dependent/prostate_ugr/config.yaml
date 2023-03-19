@@ -1,8 +1,8 @@
 data:
   dataset_name: prostate_ugr
-  dir: /data/Prostata/Images_September/Data/Partition_ROI/ROI_Arne/
-  data_split_dir: /data/Prostata/Images_September/Data/Partition_ROI/ROI_Arne/
-  artifact_dir: ./dataset_dependent/prostate_ugr/
+  dir: /data/Prostata/Images/Data/Partition_ROI/ROI_ARNE_FINAL/
+  data_split_dir: /data/Prostata/Images/Data/Partition_ROI/ROI_ARNE_FINAL/
+  artifact_dir: /home/alba/PycharmProjects/dataset_dependent/prostate_ugr/experiments/prostate2023
   image_target_size: [250, 250]
   num_classes: 4
   dataset_type: prostate_cancer

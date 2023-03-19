@@ -11,8 +11,8 @@ from mlflow_log import MLFlowLogger
 
 def main(config: Dict):
     # Only necessary if certain GPUs are used (like nvidia 2060rtx)
-    devices = tf.config.experimental.list_physical_devices('GPU')
-    tf.config.experimental.set_memory_growth(devices[0], True)
+    #devices = tf.config.experimental.list_physical_devices('GPU')
+    #tf.config.experimental.set_memory_growth(devices[0], True) #ahora me dice que este índice está out of range
 
     # Init logging with mlflow (see README)
     logger = MLFlowLogger(config)
@@ -73,9 +73,14 @@ def load_configs(args):
 if __name__ == "__main__":
     print('Load configuration')
     parser = argparse.ArgumentParser(description="Cancer Classification")
-    parser.add_argument("--default_config", "-dc", type=str, default="./config.yaml",
+    #parser.add_argument("--default_config", "-dc", type=str, default="./config.yaml",
+    #                    help="Config path (yaml file expected) to default config.")
+    parser.add_argument("--default_config", "-dc", type=str, default="/home/alba/PycharmProjects/ssl_and_mil_cancer_classification/config.yaml",
                         help="Config path (yaml file expected) to default config.")
-    parser.add_argument("--experiment_config", "-ec", type=str, default="None",
+
+    #parser.add_argument("--experiment_config", "-ec", type=str, default="None",
+    #                    help="Config path to experiment config. Parameters will override defaults. Optional.")
+    parser.add_argument("--experiment_config", "-ec", type=str, default="/home/alba/PycharmProjects/ssl_and_mil_cancer_classification/dataset_dependent/prostate_ugr/experiments/retraining/config_train.yaml",
                         help="Config path to experiment config. Parameters will override defaults. Optional.")
     args = parser.parse_args()
     config = load_configs(args)

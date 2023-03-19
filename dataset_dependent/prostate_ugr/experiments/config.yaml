@@ -1,16 +1,16 @@
 # This is the main config. Parameters are update and possibly overwritten by dataset dependent configs.
 model:
   mode: train # "train", "test", "predict", "predict_features"
-  batch_size: 16
-  epochs: 30
-  learning_rate: 0.01
+  batch_size: 8
+  epochs: 20
+  learning_rate: 0.001
   optimizer: sgd
-  class_weighted_loss: False
+  class_weighted_loss: True
   loss_function: categorical_crossentropy # "categorical_crossentropy", "focal_loss"
   metrics_patch_level: True
   metrics_wsi_level: True
   metrics_for_model_saving: val_accuracy
-  load_model: None # 'None' or path to experiment folder which containes 'models' directory
+  load_model: 'None' # 'None' or path to experiment folder which contains 'models' directory
   save_model: True # True or False
   feature_extractor:
     type: efficientnetb5 # "fsconv", "simple_cnn", "mobilenetv2", "resnet50", "efficientnetb0", "efficientnetb1"
@@ -29,7 +29,8 @@ model:
       kl_loss_factor: 1
 
 data:
-  dataset_config: ./dataset_dependent/prostate_ugr/config.yaml
+  dataset_config: /home/alba/PycharmProjects/ssl_and_mil_cancer_classification/dataset_dependent/prostate_ugr/config.yaml
+  #dataset_config = /home/alba/PycharmProjects/ssl_and_mil_cancer_classification/dataset_dependent/prostate_ugr/config.yaml no me deja así, debe ser que construye el image path juntando strings
   supervision: supervised # 'supervised', 'mil'
   positive_instance_labels_per_bag: all
   positive_pseudo_instance_labels_per_bag: 0
@@ -45,6 +46,8 @@ data:
 
 logging:
   log_experiment: True
-  log_artifacts: False
-  run_name: retraining
-  tracking_url: /work/work_arne/mlflow_server
+  log_artifacts: True
+  run_name: train_prostate2023 #esto igual me jode con mlflow, no me ha jodido, lo que sí que me jode es que todos los experimentos se me guarden
+  #en mlruns/0
+
+  tracking_url: /work/work_alba/mlflow_server

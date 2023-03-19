@@ -1,9 +1,9 @@
 # This is the main config. Parameters are updated and possibly overwritten by dataset dependent configs.
 model:
-  mode: predict # "train", "test", "predict", "predict_features"
-  batch_size: 16
+  mode: train # "train", "test", "predict", "predict_features"
+  batch_size: 8
   epochs: 20
-  learning_rate: 0.01
+  learning_rate: 0.001
   optimizer: sgd
   class_weighted_loss: True
   loss_function: categorical_crossentropy # "categorical_crossentropy", "focal_loss"
@@ -30,8 +30,8 @@ model:
       kl_loss_factor: 1
 
 data:
-  dataset_config: ./dataset_dependent/sicapv2/config.yaml
-  supervision: mil # 'supervised', 'mil', 'ssl'
+  dataset_config: /home/alba/PycharmProjects/ssl_and_mil_cancer_classification/dataset_dependent/prostate_ugr/config.yaml
+  supervision: supervised # 'supervised', 'mil', 'ssl'
   positive_instance_labels_per_bag: 5 # define the number of patch labels per WSI and class that is visible to the model
   positive_pseudo_instance_labels_per_bag: 0 # define the number of pseudo lablels per WSI
   strong_augment_brightness_range: [0.5, 1.5] # brightness augmentation range for strong augmentation
@@ -46,5 +46,5 @@ data:
 
 logging:
   log_artifacts: False
-  run_name: efficientnetb1
-  tracking_url: ./mlruns
+  run_name: train_prostate2023
+  tracking_url: /work/work_alba/mlflow_server

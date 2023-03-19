@@ -1,11 +1,13 @@
 model:
   mode: predict
-  load_model: dataset_dependent/prostate_ugr/experiments/retraining/
+  load_model: /home/alba/PycharmProjects/ssl_and_mil_cancer_classification/dataset_dependent/prostate_ugr/experiments/retraining/fine_tuning_correction
+  #load_model: /home/experiments/retraining/retraining_test
 
 data:
-  artifact_dir: dataset_dependent/prostate_ugr/experiments/retraining/
-  data_split_dir: /data/Prostata/Images_September/Data/Partition_ROI/ROI_Arne/
+  artifact_dir: dataset_dependent/prostate_ugr/experiments/retraining/fine_tuning_predictions
+  data_split_dir: /data/Prostata/Images/Data/Partition_ROI/ROI_ARNE_FINAL
+  #data_split_dir: /data/Prostata/Images_September/Data/Partition_ROI/ROI_Arne_2/
 
 logging:
-  run_name: retraining
+  run_name: fine_tuning_correction_prediction
   log_artifacts: True
